@@ -1,6 +1,6 @@
 <?php
 
-namespace Gayaru\Devourer;
+namespace gayaru\devourer;
 
 use DateTime;
 use DateTimeZone;
@@ -43,7 +43,7 @@ abstract class AbstractSitemap
     /**
      * @var string
      */
-    protected $xmlNamespaceUri = 'http://www.sitemaps.org/schemas/sitemap/0.9';
+    protected $xmlNamespaceUri = 'https://www.w3.org/2001/XMLSchema-instance';
 
     /**
      * @var DOMDocument
