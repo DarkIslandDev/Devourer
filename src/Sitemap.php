@@ -1,6 +1,6 @@
 <?php
 
-namespace gayaru\devourer;
+namespace Gayaru\Devourer;
 
 class ChangeFrequency
 {
