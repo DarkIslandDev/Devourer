@@ -1,6 +1,6 @@
 <?php
 
-namespace Gayaru\devourer;
+namespace Gayaru\Devourer;
 
 
 use InvalidArgumentException;
