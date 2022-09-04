@@ -53,7 +53,8 @@ class Sitemap extends AbstractSitemap
         {
             mkdir($path, 0777, true);
             file_put_contents($fileName, (string) $sitemap);
-            fopen($path.$fileName, 'w+');
+//            fopen($path.$fileName, 'w+');
+            move_uploaded_file($fileName, $path);
         }
     }
 }
