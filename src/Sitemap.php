@@ -38,7 +38,7 @@ class Sitemap extends AbstractSitemap
         $dir = "upload";
         if(file_exists($dir))
         {
-            return null;
+            return;
         }
         else
         {
