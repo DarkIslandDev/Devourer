@@ -1,0 +1,22 @@
+{
+    "name": "gayaru/devourer",
+    "description": "sitemap generation tool",
+    "type": "library",
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Gayaru\\Devourer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DarkIslandDev",
+            "email": "DarkIslandDev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1.0",
+        "ext-dom": "*"
+    }
+}
