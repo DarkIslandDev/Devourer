@@ -14,7 +14,7 @@
             "email": "DarkIslandDev@gmail.com"
         }
     ],
-    "minimum-stability": "1.1",
+    "minimum-stability": "main",
     "require": {
         "php": ">=7.1.0",
         "ext-dom": "*",
