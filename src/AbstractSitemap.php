@@ -78,7 +78,7 @@ abstract class AbstractSitemap
             $this->freeze();
         }
 
-        return $this->document->save();
+        return $this->document->saveXML();
     }
 
     /**
