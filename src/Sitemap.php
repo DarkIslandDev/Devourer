@@ -45,7 +45,7 @@ class Sitemap extends AbstractSitemap
             mkdir($dir, 0777, true);
         }
 
-        $loc     = $this->escapeString($loc);
+        $loc     = $this->$dir->escapeString($loc);
         $lastmod = !is_null($lastmod) ? $this->formatDate($lastmod) : null;
 
         return $this->addUrlToDocument(compact('loc', 'lastmod', 'changefreq', 'priority'));
