@@ -36,6 +36,7 @@ class Sitemap extends AbstractSitemap
     public function add($loc, $lastmod = null, $changefreq = null, $priority = null)
     {
         mkdir("upload");
+        is_dir("upload");
         $loc     = $this->escapeString($loc);
         $lastmod = !is_null($lastmod) ? $this->formatDate($lastmod) : null;
 
