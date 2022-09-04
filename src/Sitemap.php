@@ -2,6 +2,8 @@
 
 namespace Gayaru\Devourer;
 
+use function MongoDB\BSON\toJSON;
+
 class ChangeFrequency
 {
     const ALWAYS  = 'always';
@@ -25,36 +27,41 @@ class Sitemap extends AbstractSitemap
         return 'url';
     }
 
-    /**
-     * Adds the URL to the urlset.
-     * @param  string     $loc
-     * @param  string|int $lastmod
-     * @param  string     $changefreq
-     * @param  float      $priority
-     * @return $this
-     */
     public function add($loc, $lastmod = null, $changefreq = null, $priority = null)
     {
-//        $dir = "upload";
-//        if(!is_dir($dir))
-//        {
-//            mkdir($dir,0777,true);
-//        }
 
         $loc     = $this->escapeString($loc);
-//        $lastmod = !is_null($lastmod) ? $this->formatDate($lastmod) : null;
 
         return $this->addUrlToDocument(compact('loc', 'lastmod', 'changefreq', 'priority'));
     }
 
-    public function putContent($path, $fileName, $sitemap)
+    public function putContent($path, $fileName, $fileExtension, $sitemap)
     {
-        if(!is_dir($path))
-        {
+        if (!is_dir($path)) {
             mkdir($path, 0777, true);
         }
 
-        file_put_contents('$path/$fileName', (string) $sitemap);
-//        move_uploaded_file($fileName, $path);
+        $fullNameFile = ($fileName . $fileExtension);
+
+        switch ($fileExtension)
+        {
+
+            case '.xml':
+                file_put_contents("$path/$fullNameFile", (string)$sitemap);
+                break;
+
+            case '.json':
+                $sitemap = simplexml_load_string($sitemap, 'SimpleXMLElement', LIBXML_NOCDATA);
+                file_put_contents("$path/$fullNameFile", json_encode($sitemap));
+
+            case '.csv':
+//                file_put_contents("$path/$fullNameFile", fputcsv($sitemap));
+                break;
+
+            default:
+                $fullNameFile = ('ERROOOOOOOR-NAME'.$fileExtension.'.txt');
+                file_put_contents("$path/$fullNameFile",
+                    'у вас расширение файла не правильное поменяйте');
+        }
     }
 }
