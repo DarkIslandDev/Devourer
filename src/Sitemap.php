@@ -39,10 +39,6 @@ class Sitemap extends AbstractSitemap
         if(!is_dir($dir))
         {
             mkdir($dir,0777,true);
-            if (!file_exists($loc))
-            {
-                fopen($dir.$loc, 'w+');
-            }
         }
 
         $loc     = $this->escapeString($loc);
