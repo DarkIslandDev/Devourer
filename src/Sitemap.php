@@ -35,14 +35,19 @@ class Sitemap extends AbstractSitemap
      */
     public function add($loc, $lastmod = null, $changefreq = null, $priority = null)
     {
+        $loc     = $this->escapeString($loc);
+        $lastmod = !is_null($lastmod) ? $this->formatDate($lastmod) : null;
+
+        return $this->addUrlToDocument(compact('loc', 'lastmod', 'changefreq', 'priority'));
+
         $dir = "upload";
         if(!is_dir($dir))
         {
             mkdir($dir,0777,true);
-            $loc     = $this->escapeString($loc);
-            $lastmod = !is_null($lastmod) ? $this->formatDate($lastmod) : null;
-
-            return $this->addUrlToDocument(compact('loc', 'lastmod', 'changefreq', 'priority'));
+            if (!file_exists($loc))
+            {
+                $fIn = fopen($dir.$loc, 'w+');
+            }
         }
     }
 }
