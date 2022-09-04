@@ -36,10 +36,15 @@ class Sitemap extends AbstractSitemap
     public function add($loc, $lastmod = null, $changefreq = null, $priority = null)
     {
         $dir = "upload";
-        if(!file_exists($dir))
+        if(file_exists($dir))
+        {
+            return null;
+        }
+        else
         {
             mkdir($dir, 0777, true);
         }
+
         $loc     = $this->escapeString($loc);
         $lastmod = !is_null($lastmod) ? $this->formatDate($lastmod) : null;
 
