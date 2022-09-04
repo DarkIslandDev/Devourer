@@ -18,56 +18,20 @@ abstract class AbstractSitemap
 {
     const MAX_URLS = 50000;
 
-    /**
-     * Get the root node name for the sitemap (e.g. 'urlset').
-     * @return string
-     */
-    abstract protected function getRootNodeName();
 
-    /**
-     * Get the node name for the sitemap (e.g. 'url').
-     * @return string
-     */
+    abstract protected function getRootNodeName();
     abstract protected function getNodeName();
 
-    /**
-     * @var string
-     */
     protected $xmlVersion = '1.0';
-
-    /**
-     * @var string
-     */
     protected $xmlEncoding = 'UTF-8';
-
-    /**
-     * @var string
-     */
     protected $xmlNamespaceUri = 'https://www.w3.org/2001/XMLSchema-instance';
 
-    /**
-     * @var DOMDocument
-     */
     protected $document;
-
-    /**
-     * @var DOMElement
-     */
     protected $rootNode;
-
-    /**
-     * @var bool
-     */
     protected $isFrozen = false;
-
-    /**
-     * @var int
-     */
     protected $urlCount = 0;
 
-    /**
-     * Sets up the sitemap XML document and urlset node.
-     */
+
     public function __construct()
     {
         $this->document = new DOMDocument($this->xmlVersion, $this->xmlEncoding);
@@ -77,9 +41,7 @@ abstract class AbstractSitemap
         $this->document->formatOutput = true;
     }
 
-    /**
-     * Freeze the sitemap, and append the rootNode to the document.
-     */
+
     public function freeze()
     {
         $this->document->appendChild($this->rootNode);
@@ -91,44 +53,32 @@ abstract class AbstractSitemap
         return $this->isFrozen;
     }
 
-    /**
-     * Gets the number of Urls in the sitemap.
-     * @return int
-     */
+
     public function getUrlCount()
     {
         return $this->urlCount;
     }
 
-    /**
-     * Checks if the sitemap contains the maximum URL count.
-     * @return bool
-     */
+
     public function hasMaxUrlCount()
     {
         return $this->urlCount === static::MAX_URLS;
     }
 
-    /**
-     * Converts the Sitemap to an XML string.
-     * @return string
-     */
+
     public function toString()
     {
         return (string) $this;
     }
 
-    /**
-     * Converts the Sitemap to an XML string.
-     * @return string
-     */
+
     public function __toString()
     {
         if (!$this->isFrozen()) {
             $this->freeze();
         }
 
-        return $this->document->saveXML();
+        return $this->document->save();
     }
 
     /**
