@@ -9,7 +9,7 @@ composer require gayaru/devourer
 
 ```
 
-## Basic Sitemap
+## Basic use
 
 ``` php
 use Gayaru\Devourer\Sitemap;
