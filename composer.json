@@ -19,6 +19,7 @@
         "ext-dom": "*",
         "ext-json": "*",
       "ext-mongodb": "*",
-      "ext-simplexml": "*"
+      "ext-simplexml": "*",
+      "ext-libxml": "*"
     }
 }

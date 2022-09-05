@@ -2,8 +2,6 @@
 
 namespace Gayaru\Devourer;
 
-use function MongoDB\BSON\toJSON;
-
 class ChangeFrequency
 {
     const ALWAYS  = 'always';
@@ -51,11 +49,12 @@ class Sitemap extends AbstractSitemap
                 break;
 
             case '.json':
-                $sitemap = simplexml_load_string($sitemap, 'SimpleXMLElement', LIBXML_NOCDATA);
-                file_put_contents("$path/$fullNameFile", json_encode($sitemap));
-
+                $xml = simplexml_load_string($sitemap, 'SimpleXMLElement', LIBXML_NOCDATA);
+                $json = json_encode($xml);
+                file_put_contents("$path/$fullNameFile", $json);
+                break;
             case '.csv':
-//                file_put_contents("$path/$fullNameFile", fputcsv($sitemap));
+                file_put_contents("$path/$fullNameFile", $this->convertXmlToCsvString($sitemap));
                 break;
 
             default:
@@ -64,4 +63,6 @@ class Sitemap extends AbstractSitemap
                     'у вас расширение файла не правильное поменяйте');
         }
     }
+
+
 }

@@ -39,6 +39,7 @@ abstract class AbstractSitemap
         $this->rootNode = $this->document->createElementNS($this->xmlNamespaceUri, $this->getRootNodeName());
 
         $this->document->formatOutput = true;
+
     }
 
     public function freeze()
@@ -90,6 +91,25 @@ abstract class AbstractSitemap
         $this->urlCount++;
 
         return $this;
+    }
+
+    public function convertXmlToCsvString($xmlString) {
+        $xml = simplexml_load_string($xmlString);
+
+        $header = false;
+
+        $csv = '';
+
+        foreach($xml as $key => $value){
+            if(!$header) {
+                $csv .= implode(',', array_keys(get_object_vars($value)));
+                $header = true;
+            }
+            $csv .= nl2br("\n");
+            $csv .= implode(';', get_object_vars($value));
+        }
+
+        return $csv;
     }
 
     protected function escapeString($string)
